@@ -1,0 +1,30 @@
+{
+  "name": "belajar-nodejs-restful-api",
+  "version": "1.0.0",
+  "description": "Belajar NodeJS RESTful API",
+  "license": "ISC",
+  "author": "Muhammad Fadhlan",
+  "type": "module",
+  "main": "src/main.js",
+  "scripts": {
+    "build": "echo 'No build needed'",
+    "start": "node src/main.js"
+  },
+  "dependencies": {
+    "@prisma/client": "4.16.2",
+    "axios": "^1.13.6",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^4.22.1",
+    "joi": "^18.0.2",
+    "mysql2": "^3.22.0",
+    "prisma": "4.16.2",
+    "uuid": "^8.3.2",
+    "winston": "^3.19.0"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "supertest": "^7.1.4"
+  }
+}

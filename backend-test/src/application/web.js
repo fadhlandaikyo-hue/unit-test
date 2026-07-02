@@ -1,0 +1,27 @@
+import express from "express";
+import {publicRouter} from "../route/public-api.js";
+import {errorMiddleware} from "../middleware/error-middleware.js";
+import {userRouter} from "../route/api.js";
+import cors from "cors";
+
+export const web = express();
+
+web.use(cors({
+    origin: ['http://localhost:5173'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: [
+        'Content-Type',
+        'Authorization',
+        'X-API-TOKEN',
+        'Accept'
+    ],
+    credentials: true
+}))
+
+// ✅ Handle preflight request untuk Safari
+web.options('*', cors())
+
+web.use(express.json());
+web.use(publicRouter);
+web.use(userRouter);
+web.use(errorMiddleware);
