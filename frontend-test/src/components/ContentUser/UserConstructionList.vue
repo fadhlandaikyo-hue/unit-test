@@ -123,7 +123,7 @@ onActivated(loadProjectState)
     </div>
   </div>
 
-  <div class="flex-grow px-4 sm:px-6 lg:px-8 pb-12">
+  <div class="grow px-4 sm:px-6 lg:px-8 pb-12">
     <div class="max-w-7xl mx-auto">
 
       <div v-if="filteredProjects.length === 0" class="text-center py-20 text-gray-400">

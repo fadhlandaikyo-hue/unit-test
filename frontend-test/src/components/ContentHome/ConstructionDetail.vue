@@ -315,12 +315,6 @@ const projectImages = computed(() => {
   return [{ src: "/building.svg", takenAt: null }]
 })
 
-function parseISODate(str) {
-  if (!str) return ""
-  const candidate = str.trim()
-  return /^\d{4}-\d{2}-\d{2}$/.test(candidate) ? candidate : ""
-}
-
 function formatDisplayDate(value) {
   if (!value) return "-"
   const date = new Date(`${value}T00:00:00`)
@@ -345,17 +339,6 @@ function displayDateRange(value) {
   const { start, end } = splitCompletionDate(value)
   if (!start && !end) return "-"
   return `${formatDisplayDate(start)} - ${formatDisplayDate(end)}`
-}
-
-const showDateModal = ref(false)
-const draftStartDate = ref("")
-const draftEndDate = ref("")
-
-function openDateModal() {
-  const { start, end } = splitCompletionDate(project.value.completionDate)
-  draftStartDate.value = parseISODate(start)
-  draftEndDate.value = parseISODate(end)
-  showDateModal.value = true
 }
 
 function formatProgress(value) {

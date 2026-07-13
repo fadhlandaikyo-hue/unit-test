@@ -50,40 +50,40 @@ onUnmounted(() => {
     <h2 class="text-[32px] uppercase font-semibold mb-4 pb-10 md:pb-0 "/>
     <p class="text-gray-600 max-w-2xl mx-auto"></p>
   </div>
-  <div class="flex items-center justify-center min-h-[420px] bg-gray-100 p-4 md:min-h-[520px]">
+  <div class="flex items-center justify-center min-h-105 bg-gray-100 p-4 md:min-h-130">
 
     <div class="relative w-full max-w-4xl group overflow-hidden rounded-2xl shadow-2xl" @mouseenter="stopAutoSlide"
          @mouseleave="startAutoSlide">
       <div class="flex transition-transform duration-700 ease-in-out h-64 md:h-96"
            :style="{ transform: `translateX(-${activeIndex * 100}%)` }">
-        <div class="w-full flex-shrink-0 relative">
+        <div class="w-full shrink-0 relative">
           <a href="https://www.daikyou-g.co.jp/index.php">
             <img src="/img/unnamed.webp" class="w-full h-full object-cover" alt="Slide 1">
           </a>
 
         </div>
 
-        <div class="w-full flex-shrink-0 relative">
+        <div class="w-full shrink-0 relative">
           <img src="/construction_img/奥山/奥山.webp" class="w-full h-full object-cover" alt="Slide 2">
         </div>
 
-        <div class="w-full flex-shrink-0 relative">
+        <div class="w-full shrink-0 relative">
           <img src="/construction_img/佐陀/佐陀.webp" class="w-full h-full object-cover" alt="Slide 2">
         </div>
 
-        <div class="w-full flex-shrink-0 relative">
+        <div class="w-full shrink-0 relative">
           <img src="/construction_img/奥陰/奥陰.webp" class="w-full h-full object-cover" alt="Slide 2">
         </div>
 
-        <div class="w-full flex-shrink-0 relative">
+        <div class="w-full shrink-0 relative">
           <img src="/construction_img/宮ノ前/宮ノ前.webp" class="w-full h-full object-cover" alt="Slide 2">
         </div>
 
-        <div class="w-full flex-shrink-0 relative">
+        <div class="w-full shrink-0 relative">
           <img src="/construction_img/新屋/新屋.webp" class="w-full h-full object-cover" alt="Slide 2">
         </div>
 
-        <div class="w-full flex-shrink-0 relative">
+        <div class="w-full shrink-0 relative">
           <img src="/construction_img/日南/日南.webp" class="w-full h-full object-cover" alt="Slide 2">
         </div>
 

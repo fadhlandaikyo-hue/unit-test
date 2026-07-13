@@ -464,7 +464,7 @@ onMounted(async () => {
   project.value.saved = persisted
 
   const persistedDate = await getProjectDate(project.value.id)
-  if (persistedDate?.startDate && persistedDate?.endDate) {
+  if (persistedDate?.startDate && persistedDatev?.endDate) {
     project.value.completionDate = `${persistedDate.startDate} - ${persistedDate.endDate}`
   }
 })

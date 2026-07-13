@@ -1,6 +1,4 @@
-﻿
-
-export function useProgressDrag() {
+﻿export function useProgressDrag() {
     let activeProject = null
     let trackElement = null
 

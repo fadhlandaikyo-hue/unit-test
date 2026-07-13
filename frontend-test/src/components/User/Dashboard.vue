@@ -59,7 +59,7 @@ onUnmounted(() => {
 
         <div class="space-y-4">
           <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition">
-            <span class="flex-shrink-0 w-2 h-2 mt-2 bg-red-500 rounded-full mr-4"></span>
+            <span class="shrink-0 w-2 h-2 mt-2 bg-red-500 rounded-full mr-4"></span>
             <div>
               <p class="text-sm font-semibold text-gray-900">安全調整会議</p>
               <p class="text-sm text-gray-600 mt-1">全現場チームを対象に、毎日14時からツールボックスミーティングを実施します。
@@ -67,14 +67,14 @@ onUnmounted(() => {
             </div>
           </div>
           <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition">
-            <span class="flex-shrink-0 w-2 h-2 mt-2 bg-yellow-500 rounded-full mr-4"></span>
+            <span class="shrink-0 w-2 h-2 mt-2 bg-yellow-500 rounded-full mr-4"></span>
             <div>
               <p class="text-sm font-semibold text-gray-900">橋梁床版コンクリート打設</p>
               <p class="text-sm text-gray-600 mt-1">ゾーンBのコンクリート打設は計画数量に到達し、スランプ試験に合格しました。ゾーンAの鉄筋配置の修正作業は、次回のコンクリート打設前に実施予定です。</p>
             </div>
           </div>
           <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition">
-            <span class="flex-shrink-0 w-2 h-2 mt-2 bg-green-500 rounded-full mr-4"></span>
+            <span class="shrink-0 w-2 h-2 mt-2 bg-green-500 rounded-full mr-4"></span>
             <div>
               <p class="text-sm font-semibold text-gray-900">
                 設備メンテナンスが完了しました。

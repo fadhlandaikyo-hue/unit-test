@@ -13,10 +13,6 @@ const router = createRouter({
         return { top: 0, left: 0 }
     },
     routes: [
-        {
-            path: "/example",
-            component: () => import("./components/Example.vue"),
-        },
 
         // Page for Users
         {
