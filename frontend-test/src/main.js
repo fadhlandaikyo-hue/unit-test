@@ -1,4 +1,4 @@
-﻿import { createApp } from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
 import { createRouter, createWebHistory } from "vue-router"
 import './style.css'
@@ -127,8 +127,6 @@ router.beforeEach((to, from, next) => {
 
     if (to.meta.requiresAuth && !token) {
         next("/login")
-    } else if (to.path === "/login" && token) {
-        next("/dashboard")
     } else {
         next()
     }

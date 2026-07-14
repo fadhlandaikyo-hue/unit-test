@@ -1,15 +1,34 @@
-﻿<script setup>
+<script setup>
 import {useLocalStorage} from "@vueuse/core";
-import {onBeforeMount, ref} from "vue";
+import {onBeforeMount, onBeforeUnmount, onMounted, ref, watch} from "vue";
+import {useRoute} from "vue-router";
 import {userDetailName} from "../../lib/api/UserApi.js";
 import {alertError} from "../../lib/alert.js";
 
 const token = useLocalStorage('token', "")
 const userName = ref("")
+const isMobileMenuOpen = ref(false)
+const route = useRoute()
+let authCheckIntervalId = null
+
+function closeMobileMenu() {
+  isMobileMenuOpen.value = false
+}
+
+function handleEscape(event) {
+  if (event.key === "Escape") {
+    closeMobileMenu()
+  }
+}
 
 async function fetchUserName() {
   const response = await userDetailName(token.value);
-  const responseBody = await response.json();
+
+  if (response.status === 401) {
+    return
+  }
+
+  const responseBody = await response.json().catch(() => ({}));
   console.log(responseBody);
 
   if (response.status === 200) {
@@ -22,10 +41,65 @@ async function fetchUserName() {
 onBeforeMount(async () => {
   await fetchUserName();
 })
+
+onMounted(() => {
+  window.addEventListener("keydown", handleEscape)
+  authCheckIntervalId = window.setInterval(fetchUserName, 10000)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener("keydown", handleEscape)
+
+  if (authCheckIntervalId) {
+    window.clearInterval(authCheckIntervalId)
+  }
+
+  document.body.style.overflow = ""
+})
+
+watch(() => route.fullPath, closeMobileMenu)
+
+watch(isMobileMenuOpen, (isOpen) => {
+  document.body.style.overflow = isOpen ? "hidden" : ""
+})
 </script>
 
 <template>
-  <aside class="w-80 bg-white border-l border-gray-200 flex flex-col shadow-lg z-20">
+  <button
+      type="button"
+      class="lg:hidden fixed top-4 right-4 z-50 inline-flex h-11 w-11 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      :aria-expanded="isMobileMenuOpen"
+      aria-controls="user-navigation"
+      :aria-label="isMobileMenuOpen ? 'Close menu' : 'Open menu'"
+      @click="isMobileMenuOpen = !isMobileMenuOpen">
+    <svg v-if="!isMobileMenuOpen" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"></path>
+    </svg>
+    <svg v-else class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 18 6M6 6l12 12"></path>
+    </svg>
+  </button>
+
+  <Transition
+      enter-active-class="transition-opacity duration-200"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition-opacity duration-200"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0">
+    <button
+        v-if="isMobileMenuOpen"
+        type="button"
+        class="lg:hidden fixed inset-0 z-30 bg-gray-900/50"
+        aria-label="Close menu"
+        @click="closeMobileMenu">
+    </button>
+  </Transition>
+
+  <aside
+      id="user-navigation"
+      class="fixed inset-y-0 right-0 z-40 w-72 max-w-[85vw] bg-white border-l border-gray-200 flex flex-col shadow-lg transition-transform duration-300 ease-out lg:static lg:w-80 lg:max-w-none lg:translate-x-0"
+      :class="isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'">
 
     <div class="h-20 flex items-center justify-center border-b border-gray-100">
       <div class="flex items-center">
@@ -80,12 +154,6 @@ onBeforeMount(async () => {
         <div class="border-t border-gray-100"></div>
       </div>
 
-      <RouterLink to="/dashboard/member" class="flex items-center px-4 py-3 text-sm font-medium rounded-xl text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors group">
-        <svg class="mr-3 h-5 w-5 text-gray-400 group-hover:text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2" d="M10 19H5a1 1 0 0 1-1-1v-1a3 3 0 0 1 3-3h2m10 1a3 3 0 0 1-3 3m3-3a3 3 0 0 0-3-3m3 3h1m-4 3a3 3 0 0 1-3-3m3 3v1m-3-4a3 3 0 0 1 3-3m-3 3h-1m4-3v-1m-2.121 1.879-.707-.707m5.656 5.656-.707-.707m-4.242 0-.707.707m5.656-5.656-.707.707M12 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-        </svg>
-      </RouterLink>
-
     </nav>
 
     <div class="p-4 border-t border-gray-100">
@@ -106,4 +174,3 @@ onBeforeMount(async () => {
 <style scoped>
 
 </style>
-
